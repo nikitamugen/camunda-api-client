@@ -1,0 +1,36 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.bmuschko.nexus'
+nexus {
+    sign = false
+    repositoryUrl = 'http://192.168.5.156:8081/repository/maven-releases/'
+    snapshotRepositoryUrl = 'http://192.168.5.156:8081/repository/maven-snapshots/'
+}
+
+group 'pro.sisit'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'org.camunda.bpm:camunda-external-task-client:7.15.0'
+
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+}
+
+test {
+    useJUnitPlatform()
+}
